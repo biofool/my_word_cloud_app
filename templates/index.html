@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Word Cloud+Quote Search</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Word Cloud of Keywords</h1>
+    <img src="{{ url_for('static', filename='wordcloud.png') }}" alt="Word Cloud">
+  <div class="search-container">
+      <label for="search-input"></label><input type="text" id="search-input" placeholder="Enter keyword...">
+    <div id="search-results"></div>
+  </div>
+  <script>
+    // Retrieve the quotes array from the JSON object passed by Flask
+    const quotes = JSON.parse('{{ quotes_json|tojson|safe }}');
+    
+    // The rest of your JavaScript code here...
+
+  </script>
+  <script src="script.js"></script>
+</body>
+</html>
