@@ -2,17 +2,21 @@ from flask import Flask, render_template
 import json
 import os
 from wordcloud import WordCloud
+from flask import url_for
 import matplotlib
 matplotlib.use('Agg')  # Use a non-GUI backend
 import matplotlib.pyplot as plt
 
 app = Flask(__name__)
+static_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'static')
+
+# Define the path to the quotes.json file within the static directory
+quotes_path = os.path.join(static_dir, 'quotes.json')
 
 
 @app.route('/')
 def index():
-    pwd = os.getcwd()
-    with open('/Users/kkron/projects/CABW/my_word_cloud_app/static/quotes.json') as json_file:
+    with open(quotes_path) as json_file:
         data = json.load(json_file)
         keywords = []
         for quote in data['quotes']:
@@ -28,8 +32,9 @@ def index():
     plt.imshow(wordcloud, interpolation='bilinear')
     plt.axis('off')
     plt.tight_layout()
+    wordcloud_path = os.path.join(static_dir, 'wordcloud.png')
 
-    plt.savefig('/Users/kkron/projects/CABW/my_word_cloud_app/static/wordcloud.png')
+    plt.savefig(wordcloud_path)
     plt.close()
     quotes_json=data['quotes']
     return render_template('index.html', quotes_json=quotes_json)
