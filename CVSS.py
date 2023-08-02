@@ -1,46 +1,30 @@
-import matplotlib.pyplot as plt
 import numpy as np
+import matplotlib.pyplot as plt
 
-# Sample CVSS v3 metric values
-labels = ["AV", "AC", "UI", "S", "C", "I", "A"]
-values = [0.85, 0.44, 0.70, 0.50, 0.66, 0.2, 0.56]  # Mock values for demonstration
-max_value = max(values)
+# CVSS Metrics
+labels_full = ["Attack Vector", "Attack Complexity", "Privileges Required", "User Interaction",
+               "Scope", "Confidentiality", "Integrity", "Availability"]
 
-# Calculate the positions of each point on the plot
-num_vars = len(labels)
-angles = np.linspace(0, 2 * np.pi, num_vars, endpoint=False).tolist()
+# Sample CVSS values for demonstration purposes (values typically range between 0 and 1)
+values = [0.9, 0.6, 0.3, 0.7, 0.5, 0.8, 0.9, 0.7]
 
-# Adding background colors to the radar plot based on the given instructions
-# Define the background color ranges
-# CVSS v3 metric names and their abbreviations
-labels_full = ["Attack Vector", "Attack Complexity**-1", "User Interaction**-1", "Scope",
-               "Confidentiality", "Integrity", "Availability"]
-labels_abbrev = ["AV", "AC", "UI", "S", "C", "I", "A"]
+# Convert to an angle for the polar plot (octagonal shape)
+num_vars = len(labels_full)
+angles_octagon = np.linspace(0, 2 * np.pi, num_vars + 1)
 
+# Define the radii for each of the zones
+green_radius = 0.6
+yellow_radius = 0.9
+red_radius = 1.0
 
-
-green_zone_fraction = 6/10
-yellow_zone_fraction = 3/10
-red_zone_fraction = 1/10
-
-# Calculate the values for each zone
-green_radius = max_value * green_zone_fraction
-yellow_radius = green_radius + max_value * yellow_zone_fraction
-red_radius = yellow_radius + max_value * red_zone_fraction
-# Adjust the spider chart to have dodecahedron (12-sided) background zones
-
-# Increase the number of divisions for the dodecahedron shape
+# For the dodecahedron zones
 num_vars_dodeca = 12
 angles_dodeca = np.linspace(0, 2 * np.pi, num_vars_dodeca + 1)
-
-# Define the radii for the dodecahedron background zones
 red_radii = [red_radius] * (num_vars_dodeca + 1)
 yellow_radii = [yellow_radius] * (num_vars_dodeca + 1)
 green_radii = [green_radius] * (num_vars_dodeca + 1)
 
-# Correct the mismatch by excluding the last angle for the CVSS octagon shape
-
-# Plotting
+# Generate the Spider/Radar chart
 fig, ax = plt.subplots(figsize=(8, 8), subplot_kw=dict(polar=True))
 
 # Fill the dodecahedron backgrounds
