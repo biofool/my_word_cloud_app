@@ -2,6 +2,11 @@
 <html lang="en">
 <head>
     <title>Word Cloud+Quote Search</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
@@ -9,7 +14,19 @@
     <img src="{{ url_for('static', filename='wordcloud.png') }}" alt="Word Cloud">
   <div class="search-container">
       <label for="search-input"></label><input type="text" id="search-input" placeholder="Enter keyword...">
-    <div id="search-results"></div>
+<div id="quoteCarousel" class="carousel slide" data-ride="carousel">
+  <div class="carousel-inner" id="search-results">
+    <!-- Quotes will be inserted here by the JavaScript -->
+  </div>
+  <a class="carousel-control-prev" href="#quoteCarousel" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#quoteCarousel" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
   </div>
   <script>
     // Retrieve the quotes array from the JSON object passed by Flask

@@ -12,15 +12,19 @@ function filterQuotes(keyword) {
 }
 
 // Function to display the filtered quotes as search results
-function displayResults(filteredQuotes) {
-  const resultsHTML = filteredQuotes.map((quote) => {
-    const author = quote.author || "Morihei Ueshiba";  // Set default author if none is provided
-    return `<p><strong>${author}:</strong> ${quote.quote}</p>`;
-  }).join('');
 
-  searchResults.innerHTML = resultsHTML;
+function displayResults(filteredQuotes) {
+    let resultsHTML = '';
+    filteredQuotes.forEach((quote, index) => {
+        const activeClass = index === 0 ? 'active' : '';  // Make the first quote active
+        resultsHTML += `<div class="carousel-item ${activeClass}">
+                          <p><strong>${quote.author || "Morihei Ueshiba"}:</strong> ${quote.text}</p>
+                        </div>`;
+    });
+    searchResults.innerHTML = resultsHTML;
 }
-// Event listener for input field
+// Event listener
+// for input field
 searchInput.addEventListener('input', (event) => {
   const keyword = event.target.value.trim();
 

@@ -11,7 +11,7 @@ app = Flask(__name__)
 static_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'static')
 
 # Define the path to the quotes.json file within the static directory
-quotes_path = os.path.join(static_dir, 'quotes.json')
+quotes_path = os.path.join(static_dir, 'osensei_memoirs_quotes_8_words_escaped_pretty.json')
 
 
 @app.route('/')
